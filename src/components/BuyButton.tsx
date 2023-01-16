@@ -1,5 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
+
+import OutOfStockTooltip from "./OutOfStockTooltip";
 
 interface BuyButtonProps {
   disabled: boolean;
@@ -27,11 +29,31 @@ const StyledButton = styled.button`
     background-color: gray;
     transform: none;
     box-shadow: none;
+
+    pointer-events: none;
   }
 `;
 
 const BuyButton: FC<BuyButtonProps> = ({ disabled }) => {
-  return <StyledButton disabled={disabled}>Buy</StyledButton>;
+  const [isTooltipVisible, setIsTooltipVisible] = useState<boolean>(false);
+
+  const buyProduct = () => {
+    if (disabled) {
+      setIsTooltipVisible(true);
+
+      setTimeout(() => {
+        setIsTooltipVisible(false);
+      }, 2000);
+
+      return;
+    }
+  };
+  return (
+    <div onClick={() => buyProduct()} style={{ position: "relative" }}>
+      <StyledButton disabled={disabled}>Buy</StyledButton>
+      {isTooltipVisible && <OutOfStockTooltip />}
+    </div>
+  );
 };
 
 export default BuyButton;
