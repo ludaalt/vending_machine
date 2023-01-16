@@ -4,14 +4,21 @@ import App from "./App";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
   ul {
     list-style: none;
   }
+
   button {
     cursor: pointer;
     border: none;
