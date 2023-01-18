@@ -1,4 +1,5 @@
 export interface IProductItem {
+  id: number;
   title: string;
   count: number;
   logo: string;
@@ -8,4 +9,5 @@ export interface IProductItem {
 export type ProductsContextType = {
   productsCart: IProductItem[];
   buyProduct: (product: IProductItem) => void;
+  deleteProductFromCart: (id: number) => void;
 };

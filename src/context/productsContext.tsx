@@ -14,11 +14,21 @@ const ProductsProvider: FC<Props> = ({ children }) => {
   const [productsCart, setProductsCart] = useState<IProductItem[]>([]);
 
   const buyProduct = (product: IProductItem) => {
-    setProductsCart([...productsCart, product]);
+    const addedProduct = { ...product, id: productsCart.length - 1 };
+    setProductsCart([...productsCart, addedProduct]);
+  };
+
+  const deleteProductFromCart = (id: number) => {
+    const newProductCart = productsCart.filter(
+      (item: IProductItem) => item.id !== id
+    );
+    setProductsCart(newProductCart);
   };
 
   return (
-    <ProductsContext.Provider value={{ productsCart, buyProduct }}>
+    <ProductsContext.Provider
+      value={{ productsCart, buyProduct, deleteProductFromCart }}
+    >
       {children}
     </ProductsContext.Provider>
   );
