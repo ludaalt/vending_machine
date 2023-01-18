@@ -57,4 +57,20 @@ export const products = [
     price: getRandomPrice(),
     count: getRandomCount(0, 10),
   },
+
+  {
+    id: 8,
+    title: "potato",
+    logo: "🥔",
+    price: getRandomPrice(),
+    count: getRandomCount(0, 10),
+  },
+
+  {
+    id: 9,
+    title: "cheese",
+    logo: "🧀",
+    price: getRandomPrice(),
+    count: getRandomCount(0, 10),
+  },
 ];
