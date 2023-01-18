@@ -3,19 +3,27 @@ import styled from "styled-components";
 import MoneyButton from "./MoneyButton";
 
 const StyledMoneyPanel = styled.div`
-  width: auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+
+  & button:not(:last-child) {
+    margin-right: 20px;
+  }
 `;
 
 const MoneyPanel = () => {
   return (
-    <StyledMoneyPanel>
-      <MoneyButton nominal={50} />
-      <MoneyButton nominal={100} />
-      <MoneyButton nominal={500} />
-      <MoneyButton nominal={1000} />
-    </StyledMoneyPanel>
+    <>
+      <br />
+      available for payment banknote:
+      <br />
+      <StyledMoneyPanel>
+        <MoneyButton nominal={50} />
+        <MoneyButton nominal={100} />
+        <MoneyButton nominal={500} />
+        <MoneyButton nominal={1000} />
+      </StyledMoneyPanel>
+    </>
   );
 };
 

@@ -1,12 +1,15 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
+
+import { ProductsContext } from "../context/productsContext";
+import { ProductsContextType } from "../types/types";
 
 interface MoneyButtonProps {
   nominal: number;
 }
 
 const StyledMoneyButton = styled.button<MoneyButtonProps>`
-  min-width: 100px;
+  min-width: 90px;
   margin-bottom: 10px;
   margin-right: auto;
   padding: 12px 10px 12px 25px;
@@ -30,13 +33,25 @@ const StyledMoneyButton = styled.button<MoneyButtonProps>`
       ? `url('./images/500coins.png')`
       : `url('./images/1000coins.png')`};
 
-  &:hover {
+  &:hover:enabled {
     transform: scale(1.05);
   }
 `;
 
 const MoneyButton: FC<MoneyButtonProps> = ({ nominal }) => {
-  return <StyledMoneyButton nominal={nominal}>{nominal}</StyledMoneyButton>;
+  const { productsCart, provideMoney } = useContext(
+    ProductsContext
+  ) as ProductsContextType;
+
+  return (
+    <StyledMoneyButton
+      disabled={productsCart.length === 0}
+      nominal={nominal}
+      onClick={() => provideMoney(nominal)}
+    >
+      {nominal}
+    </StyledMoneyButton>
+  );
 };
 
 export default MoneyButton;
