@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
-import { products } from "../data/products";
 import ProductItem from "./ProductItem";
+import { ProductsContext } from "../context/productsContext";
+import { ProductsContextType } from "../types/types";
 
 const StyledProductsList = styled.ul`
   display: flex;
@@ -9,9 +11,10 @@ const StyledProductsList = styled.ul`
 `;
 
 const ProductsList = () => {
+  const { productsList } = useContext(ProductsContext) as ProductsContextType;
   return (
     <StyledProductsList>
-      {products.map((item) => (
+      {productsList.map((item) => (
         <ProductItem key={item.title} item={item} />
       ))}
     </StyledProductsList>

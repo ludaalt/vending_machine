@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 
 import { IProductItem, ProductsContextType } from "../types/types";
+import { products } from "../data/products";
 
 export const ProductsContext = React.createContext<ProductsContextType | null>(
   null
@@ -11,12 +12,21 @@ interface Props {
 }
 
 const ProductsProvider: FC<Props> = ({ children }) => {
+  const [productsList, setProductsList] = useState<IProductItem[]>(products);
   const [productsCart, setProductsCart] = useState<IProductItem[]>([]);
   const [totalPayment, setTotalPayment] = useState<number>(0);
 
   const buyProduct = (product: IProductItem) => {
     const addedProduct = { ...product, id: productsCart.length - 1 };
     setProductsCart([...productsCart, addedProduct]);
+
+    const updatedProductList = productsList.map((item) => {
+      if (item.id === product.id) {
+        item.count -= 1;
+      }
+      return item;
+    });
+    setProductsList(updatedProductList);
   };
 
   const deleteProductFromCart = (id: number) => {
@@ -39,6 +49,7 @@ const ProductsProvider: FC<Props> = ({ children }) => {
         deleteProductFromCart,
         totalPayment,
         provideMoney,
+        productsList,
       }}
     >
       {children}

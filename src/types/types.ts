@@ -10,4 +10,7 @@ export type ProductsContextType = {
   productsCart: IProductItem[];
   buyProduct: (product: IProductItem) => void;
   deleteProductFromCart: (id: number) => void;
+  totalPayment: number;
+  provideMoney: (nominal: number) => void;
+  productsList: IProductItem[];
 };
