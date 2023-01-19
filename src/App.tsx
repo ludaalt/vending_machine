@@ -13,6 +13,7 @@ const AppWrapper = styled.div`
   justify-content: center;
   gap: 100px;
   background-image: url("./images/bg.jpg");
+  background-size: cover;
 `;
 
 const App = (): JSX.Element => {
