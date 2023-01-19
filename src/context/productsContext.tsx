@@ -12,6 +12,7 @@ interface Props {
 
 const ProductsProvider: FC<Props> = ({ children }) => {
   const [productsCart, setProductsCart] = useState<IProductItem[]>([]);
+  const [totalPayment, setTotalPayment] = useState<number>(0);
 
   const buyProduct = (product: IProductItem) => {
     const addedProduct = { ...product, id: productsCart.length - 1 };
@@ -25,9 +26,20 @@ const ProductsProvider: FC<Props> = ({ children }) => {
     setProductsCart(newProductCart);
   };
 
+  const provideMoney = (nominal: number) => {
+    const currentBalance = totalPayment;
+    setTotalPayment(currentBalance + nominal);
+  };
+
   return (
     <ProductsContext.Provider
-      value={{ productsCart, buyProduct, deleteProductFromCart }}
+      value={{
+        productsCart,
+        buyProduct,
+        deleteProductFromCart,
+        totalPayment,
+        provideMoney,
+      }}
     >
       {children}
     </ProductsContext.Provider>
