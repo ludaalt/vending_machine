@@ -39,13 +39,13 @@ const StyledMoneyButton = styled.button<MoneyButtonProps>`
 `;
 
 const MoneyButton: FC<MoneyButtonProps> = ({ nominal }) => {
-  const { productsCart, provideMoney } = useContext(
+  const { productsCart, provideMoney, totalCost } = useContext(
     ProductsContext
   ) as ProductsContextType;
 
   return (
     <StyledMoneyButton
-      disabled={productsCart.length === 0}
+      disabled={productsCart.length === 0 || totalCost === 0}
       nominal={nominal}
       onClick={() => provideMoney(nominal)}
     >
