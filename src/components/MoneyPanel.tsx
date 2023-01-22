@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import MoneyButton from "./MoneyButton";
+import { userBanknotes } from "../data/userBanknotes";
 
 const StyledMoneyPanel = styled.div`
   display: flex;
@@ -14,10 +15,9 @@ const MoneyPanel = () => {
     <div>
       <p style={{ marginBottom: "10px" }}>available for payment banknote:</p>
       <StyledMoneyPanel>
-        <MoneyButton nominal={50} />
-        <MoneyButton nominal={100} />
-        <MoneyButton nominal={500} />
-        <MoneyButton nominal={1000} />
+        {userBanknotes.map((item) => (
+          <MoneyButton nominal={item} />
+        ))}
       </StyledMoneyPanel>
     </div>
   );
