@@ -1,20 +1,18 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
 
 import BuyButton from "./BuyButton";
+import { IProductItem, ProductsContextType } from "../types/types";
+import { ProductsContext } from "../context/productsContext";
 
-interface ProductItemProps {
-  item: {
-    title: string;
-    count: number;
-    logo: string;
-    price: number;
-  };
-}
+type Props = {
+  item: IProductItem;
+};
 
-const StyledProductItem = styled.li<ProductItemProps>`
-  color: #fff;
-  padding: 10px 15px;
+const StyledProductItem = styled.li<Pick<Props, "item">>`
+  color: #000;
+  font-weight: bold;
+  padding: 15px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,7 +35,8 @@ const StyledProductItem = styled.li<ProductItemProps>`
   }
 `;
 
-const ProductItem: FC<ProductItemProps> = ({ item }) => {
+const ProductItem: FC<Props> = ({ item }) => {
+  const { buyProduct } = useContext(ProductsContext) as ProductsContextType;
   return (
     <StyledProductItem item={item}>
       <div>{item.logo}</div>
@@ -51,7 +50,11 @@ const ProductItem: FC<ProductItemProps> = ({ item }) => {
       )}
 
       <p>in stock: {item.count}</p>
-      <BuyButton disabled={item.count === 0} />
+      <BuyButton
+        disabled={item.count === 0}
+        buyProduct={() => buyProduct(item)}
+        item={item}
+      />
     </StyledProductItem>
   );
 };
