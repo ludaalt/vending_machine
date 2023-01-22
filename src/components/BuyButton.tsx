@@ -1,10 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 import styled from "styled-components";
 
 import OutOfStockTooltip from "./OutOfStockTooltip";
+import { IProductItem, ProductsContextType } from "../types/types";
+import { ProductsContext } from "../context/productsContext";
 
 interface BuyButtonProps {
   disabled: boolean;
+  buyProduct: (id: number) => void;
+  item: IProductItem;
 }
 
 const StyledButton = styled.button`
@@ -20,7 +24,7 @@ const StyledButton = styled.button`
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
 
-  &:hover {
+  &:hover:enabled {
     transform: scale(0.9);
   }
 
@@ -34,10 +38,11 @@ const StyledButton = styled.button`
   }
 `;
 
-const BuyButton: FC<BuyButtonProps> = ({ disabled }) => {
+const BuyButton: FC<BuyButtonProps> = ({ disabled, buyProduct, item }) => {
+  const { change } = useContext(ProductsContext) as ProductsContextType;
   const [isTooltipVisible, setIsTooltipVisible] = useState<boolean>(false);
 
-  const buyProduct = () => {
+  const handleClick = () => {
     if (disabled) {
       setIsTooltipVisible(true);
 
@@ -48,9 +53,15 @@ const BuyButton: FC<BuyButtonProps> = ({ disabled }) => {
       return;
     }
   };
+
   return (
-    <div onClick={() => buyProduct()} style={{ position: "relative" }}>
-      <StyledButton disabled={disabled}>Buy</StyledButton>
+    <div onClick={handleClick} style={{ position: "relative" }}>
+      <StyledButton
+        disabled={disabled || change > 0}
+        onClick={() => buyProduct(item.id)}
+      >
+        buy
+      </StyledButton>
       {isTooltipVisible && <OutOfStockTooltip />}
     </div>
   );
