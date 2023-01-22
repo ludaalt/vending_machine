@@ -58,13 +58,12 @@ const ProductsProvider: FC<Props> = ({ children }) => {
   const calculateChange = () => {
     setChange(totalPayment - totalCost);
 
-    setCalculatedChange(getChange(totalPayment - totalCost, availableMoney));
+    const updatedChange = getChange(totalPayment - totalCost, availableMoney);
+
+    updatedChange && setCalculatedChange(updatedChange);
 
     setTotalCost(0);
     setTotalPayment(0);
-
-    console.log(getChange(totalPayment - totalCost, availableMoney));
-    console.log(calculateChange);
   };
 
   return (
