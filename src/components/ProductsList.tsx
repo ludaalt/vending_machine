@@ -8,6 +8,7 @@ import { ProductsContextType } from "../types/types";
 const StyledProductsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const ProductsList = () => {

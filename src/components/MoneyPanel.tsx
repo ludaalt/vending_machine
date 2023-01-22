@@ -4,18 +4,15 @@ import MoneyButton from "./MoneyButton";
 
 const StyledMoneyPanel = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-
-  & button:not(:last-child) {
-    margin-right: 20px;
-  }
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 `;
 
 const MoneyPanel = () => {
   return (
     <div>
-      <p>available for payment banknote:</p>
+      <p style={{ marginBottom: "10px" }}>available for payment banknote:</p>
       <StyledMoneyPanel>
         <MoneyButton nominal={50} />
         <MoneyButton nominal={100} />

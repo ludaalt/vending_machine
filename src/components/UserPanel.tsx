@@ -13,10 +13,13 @@ const StyledUserPanel = styled.div`
   background-color: rgba(225, 255, 255, 0.8);
 
   border-radius: 20px;
-  max-width: 40%;
-  min-height: 60vh;
+  min-height: 400px;
   padding: 30px;
-  transition: all 5s ease;
+
+  @media (max-width: 1000px) {
+    padding: 30px 15px;
+    max-width: 350px;
+  }
 `;
 
 const UserPanel = () => {

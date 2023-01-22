@@ -6,7 +6,7 @@ import Vendor from "./components/Vendor";
 import UserPanel from "./components/UserPanel";
 
 const AppWrapper = styled.div`
-  padding: 30px 0;
+  padding: 30px;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -14,6 +14,14 @@ const AppWrapper = styled.div`
   gap: 100px;
   background-image: url("./images/bg.jpg");
   background-size: cover;
+
+  @media (max-width: 1000px) {
+    gap: 50px;
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const App = (): JSX.Element => {

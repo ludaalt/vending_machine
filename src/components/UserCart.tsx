@@ -56,7 +56,7 @@ const UserCart: FC = () => {
   } = useContext(ProductsContext) as ProductsContextType;
 
   return (
-    <div>
+    <div style={{ marginBottom: "20px" }}>
       <p>selected goods:</p>
       {!change && (
         <StyledCartList>

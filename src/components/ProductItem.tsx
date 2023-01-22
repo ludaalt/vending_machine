@@ -33,6 +33,11 @@ const StyledProductItem = styled.li<Pick<Props, "item">>`
       transform: ${(props) => (props.item.count === 0 ? `none` : `scale(1.3)`)};
     }
   }
+
+  @media (max-width: 400px) {
+    gap: 0;
+    width: 90%;
+  }
 `;
 
 const ProductItem: FC<Props> = ({ item }) => {
