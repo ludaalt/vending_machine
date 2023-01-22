@@ -1,7 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import { IProductItem, ProductsContextType } from "../types/types";
 import { products } from "../data/products";
+
+import { getChange } from "../services/getChange";
+import { availableMoney } from "../data/availableMoney";
 
 export const ProductsContext = React.createContext<ProductsContextType | null>(
   null
@@ -14,7 +17,14 @@ interface Props {
 const ProductsProvider: FC<Props> = ({ children }) => {
   const [productsList, setProductsList] = useState<IProductItem[]>(products);
   const [productsCart, setProductsCart] = useState<IProductItem[]>([]);
+
+  const [totalCost, setTotalCost] = useState<number>(0);
   const [totalPayment, setTotalPayment] = useState<number>(0);
+
+  const [change, setChange] = useState<number>(0);
+  const [calculatedChange, setCalculatedChange] = useState<
+    Record<number, number>
+  >({});
 
   const buyProduct = (product: IProductItem) => {
     const addedProduct = { ...product, id: productsCart.length - 1 };
@@ -41,6 +51,22 @@ const ProductsProvider: FC<Props> = ({ children }) => {
     setTotalPayment(currentBalance + nominal);
   };
 
+  useEffect(() => {
+    setTotalCost(productsCart.reduce((sum, item) => sum + item.price, 0));
+  }, [productsCart]);
+
+  const calculateChange = () => {
+    setChange(totalPayment - totalCost);
+
+    setCalculatedChange(getChange(totalPayment - totalCost, availableMoney));
+
+    setTotalCost(0);
+    setTotalPayment(0);
+
+    console.log(getChange(totalPayment - totalCost, availableMoney));
+    console.log(calculateChange);
+  };
+
   return (
     <ProductsContext.Provider
       value={{
@@ -50,6 +76,10 @@ const ProductsProvider: FC<Props> = ({ children }) => {
         totalPayment,
         provideMoney,
         productsList,
+        totalCost,
+        change,
+        calculateChange,
+        calculatedChange,
       }}
     >
       {children}

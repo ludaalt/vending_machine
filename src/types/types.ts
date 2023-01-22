@@ -7,10 +7,16 @@ export interface IProductItem {
 }
 
 export type ProductsContextType = {
+  productsList: IProductItem[];
   productsCart: IProductItem[];
   buyProduct: (product: IProductItem) => void;
   deleteProductFromCart: (id: number) => void;
+
+  totalCost: number;
   totalPayment: number;
+
   provideMoney: (nominal: number) => void;
-  productsList: IProductItem[];
+  calculateChange: () => void;
+  change: number;
+  calculatedChange: Record<number, number>;
 };
