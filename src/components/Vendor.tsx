@@ -5,8 +5,8 @@ import ProductsList from "./ProductsList";
 const StyledVendor = styled.div`
   border-radius: 20px;
   width: 400px;
-  height: 70vh;
-  padding: 30px;
+  padding: 25px;
+  padding-bottom: 35px;
   background-color: rgba(225, 255, 255, 0.7);
 `;
 
