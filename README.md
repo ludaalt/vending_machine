@@ -1,11 +1,5 @@
 # Вендинговый аппарат
 
-### Установка и запуск проекта
-
-### `npm i`
-
-### `npm start`
-
 ### Ссылка на проект
 
 https://vending-machine-ludaalt.vercel.app/
